@@ -1,0 +1,12 @@
+# Reflect this repo for what it actually is: an Infrastructure-as-Code /
+# DevOps cookbook. GitHub Linguist treats YAML and JSON as "data" and hides
+# them from the language bar by default, even though the CloudFormation, SAM,
+# Step Functions, and config templates are the bulk of the codebase.
+# Force them to count so the language breakdown is accurate.
+*.yaml linguist-detectable=true
+*.yml  linguist-detectable=true
+*.json linguist-detectable=true
+
+# Binary/bundle artifacts should not skew stats or diffs.
+*.zip  binary
+*.jpeg binary
