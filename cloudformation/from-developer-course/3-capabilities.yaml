@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: An example CloudFormation that requires CAPABILITY_IAM and CAPABILITY_NAMED_IAM
+
+Resources:
+  MyCustomNamedRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: MyCustomRoleName
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
