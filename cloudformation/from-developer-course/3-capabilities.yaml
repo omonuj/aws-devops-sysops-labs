@@ -19,3 +19,13 @@ Resources:
       Policies:
         - PolicyName: MyPolicy
           PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: 's3:*'
+                Resource: '*'
+
+Outputs:
+  RoleArn:
+    Description: The ARN of the created IAM Role
+    Value: !GetAtt MyCustomNamedRole.Arn
