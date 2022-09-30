@@ -1,0 +1,7 @@
+---
+Resources:
+  MySG:
+    Type: AWS::EC2::SecurityGroup
+    DeletionPolicy: Retain
+    Properties:
+      GroupDescription: Enable SSH access via port 22
