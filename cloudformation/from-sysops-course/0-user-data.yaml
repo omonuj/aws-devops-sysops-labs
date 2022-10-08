@@ -7,3 +7,11 @@ Resources:
       ImageId: ami-0a3c3a20c09d6f377
       InstanceType: t3.micro
       SecurityGroups:
+        - !Ref SSHSecurityGroup
+      # we install our web server with user data
+      UserData: 
+        Fn::Base64: |
+          #!/bin/bash -xe
+          dnf update -y
+          dnf install -y httpd
+          systemctl start httpd
