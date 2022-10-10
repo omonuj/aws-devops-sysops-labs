@@ -15,3 +15,12 @@ Resources:
           dnf update -y
           dnf install -y httpd
           systemctl start httpd
+          systemctl enable httpd
+          echo "<h1>Hello World from user data</h1>" > /var/www/html/index.html
+
+  # our EC2 security group
+  SSHSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: SSH and HTTP
+      SecurityGroupIngress:
