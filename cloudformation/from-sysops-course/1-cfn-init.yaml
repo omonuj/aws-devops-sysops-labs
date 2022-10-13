@@ -9,3 +9,14 @@ Resources:
       SecurityGroups:
         - !Ref SSHSecurityGroup
       # we install our web server with user data
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            # Get the latest CloudFormation package
+            dnf update -y aws-cfn-bootstrap
+            # Start cfn-init
+            /opt/aws/bin/cfn-init -s ${AWS::StackId} -r MyInstance --region ${AWS::Region} || error_exit 'Failed to run cfn-init'
+    Metadata:
+      Comment: Install a simple Apache HTTP page
+      AWS::CloudFormation::Init:
