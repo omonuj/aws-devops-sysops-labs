@@ -44,3 +44,16 @@ Resources:
               httpd:
                 enabled: 'true'
                 ensureRunning: 'true'
+
+  JonahpleWaitCondition:
+    CreationPolicy:
+      ResourceSignal:
+        Timeout: PT3M
+        Count: 1
+    Type: AWS::CloudFormation::WaitCondition
+
+  # our EC2 security group
+  SSHSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: SSH and HTTP
