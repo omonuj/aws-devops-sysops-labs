@@ -10,3 +10,15 @@ Resources:
         - !Ref SSHSecurityGroup
       # we install our web server with user data
       UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -x
+            # Get the latest CloudFormation package
+            dnf update -y aws-cfn-bootstrap
+            # Initialize EC2 Instance
+            /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyInstance --region ${AWS::Region}
+            # Get result of last command
+            INIT_STATUS=$?
+            # send result back using cfn-signal
+            /opt/aws/bin/cfn-signal -e $INIT_STATUS --stack ${AWS::StackName} --resource JonahpleWaitCondition --region ${AWS::Region}
+            # exit the script
