@@ -22,3 +22,14 @@ Resources:
             # send result back using cfn-signal
             /opt/aws/bin/cfn-signal -e $INIT_STATUS --stack ${AWS::StackName} --resource JonahpleWaitCondition --region ${AWS::Region}
             # exit the script
+            exit $INIT_STATUS
+    Metadata:
+      Comment: Install a simple Apache HTTP page
+      AWS::CloudFormation::Init:
+        config:
+          packages:
+            yum:
+              httpd: []
+          files:
+            "/var/www/html/index.html":
+              content: |
