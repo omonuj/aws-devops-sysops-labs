@@ -1,0 +1,9 @@
+Resources:
+  MyKeyPair:
+    Type: AWS::EC2::KeyPair
+    Properties:
+      KeyName: DemoKeyPair
+      KeyType: rsa
+
+  myStack:
+    Type: AWS::CloudFormation::Stack
