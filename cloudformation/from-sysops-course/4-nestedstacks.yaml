@@ -7,3 +7,11 @@ Resources:
 
   myStack:
     Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/cloudformation-templates-us-east-1/LAMP_Single_Instance.template
+      Parameters:
+        KeyName: !Ref MyKeyPair
+        DBName: "mydb"
+        DBUser: "user"
+        DBPassword: "pass"
+        DBRootPassword: "passroot"
