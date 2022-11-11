@@ -15,3 +15,11 @@ Resources:
         DBUser: "user"
         DBPassword: "pass"
         DBRootPassword: "passroot"
+        InstanceType: t3.micro
+        SSHLocation: "0.0.0.0/0"
+
+Outputs:
+  StackRef:
+    Value: !Ref myStack
+  OutputFromNestedStack:
+    Value: !GetAtt myStack.Outputs.WebsiteURL
