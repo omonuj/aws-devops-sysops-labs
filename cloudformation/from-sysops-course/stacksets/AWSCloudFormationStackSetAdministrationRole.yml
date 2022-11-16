@@ -8,3 +8,12 @@ Resources:
       RoleName: AWSCloudFormationStackSetAdministrationRole
       AssumeRolePolicyDocument:
         Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: cloudformation.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: AssumeRole-AWSCloudFormationStackSetExecutionRole
