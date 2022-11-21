@@ -7,3 +7,13 @@ Parameters:
     Description: AWS Account Id of the administrator account (the account in which StackSets will be created).
     MaxLength: 12
     MinLength: 12
+
+Resources:
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: AWSCloudFormationStackSetExecutionRole
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
