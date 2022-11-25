@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Enable AWS Config
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Recorder Configuration
+        Parameters:
+          - AllSupported
+          - IncludeGlobalResourceTypes
+          - ResourceTypes
+      - Label:
+          default: Delivery Channel Configuration
+        Parameters:
+          - DeliveryChannelName
+          - Frequency
+      - Label:
+          default: Delivery Notifications
+        Parameters:
+          - TopicArn
+          - NotificationEmail
+    ParameterLabels:
+      AllSupported:
+        default: Support all resource types
+      IncludeGlobalResourceTypes:
+        default: Include global resource types
+      ResourceTypes:
