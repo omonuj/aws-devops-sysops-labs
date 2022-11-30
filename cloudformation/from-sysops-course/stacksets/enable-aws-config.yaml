@@ -109,4 +109,32 @@ Mappings:
       6hours  : Six_Hours
       12hours : Twelve_Hours
       24hours : TwentyFour_Hours
-
+
+Resources:
+
+  ConfigBucket:
+    DeletionPolicy: Retain
+    Type: AWS::S3::Bucket
+
+  ConfigBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref ConfigBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: AWSConfigBucketPermissionsCheck
+            Effect: Allow
+            Principal:
+              Service:
+                - config.amazonaws.com
+            Action: s3:GetBucketAcl
+            Resource:
+              - !Sub "arn:${AWS::Partition}:s3:::${ConfigBucket}"
+          - Sid: AWSConfigBucketDelivery
+            Effect: Allow
+            Principal:
+              Service:
+                - config.amazonaws.com
+            Action: s3:PutObject
+            Resource:
