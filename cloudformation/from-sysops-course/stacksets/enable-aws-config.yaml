@@ -81,4 +81,32 @@ Parameters:
 
   NotificationEmail:
     Type: String
-    Default: <None>
+    Default: <None>
+    Description: Email address for AWS Config notifications (for new topics).
+
+Conditions:
+  IsAllSupported: !Equals
+    - !Ref AllSupported
+    - True
+  IsGeneratedDeliveryChannelName: !Equals
+    - !Ref DeliveryChannelName
+    - <Generated>
+  CreateTopic: !Equals
+    - !Ref TopicArn
+    - <New Topic>
+  CreateSubscription: !And
+    - !Condition CreateTopic
+    - !Not
+      - !Equals
+        - !Ref NotificationEmail
+        - <None>
+
+Mappings:
+  Settings:
+    FrequencyMap:
+      1hour   : One_Hour
+      3hours  : Three_Hours
+      6hours  : Six_Hours
+      12hours : Twelve_Hours
+      24hours : TwentyFour_Hours
+
