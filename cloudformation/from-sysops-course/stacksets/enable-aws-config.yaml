@@ -137,4 +137,32 @@ Resources:
               Service:
                 - config.amazonaws.com
             Action: s3:PutObject
-            Resource:
+            Resource:
+              - !Sub "arn:${AWS::Partition}:s3:::${ConfigBucket}/AWSLogs/${AWS::AccountId}/*"
+
+  ConfigTopic:
+    Condition: CreateTopic
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub "config-topic-${AWS::AccountId}"
+      DisplayName: AWS Config Notification Topic
+
+  ConfigTopicPolicy:
+    Condition: CreateTopic
+    Type: AWS::SNS::TopicPolicy
+    Properties:
+      Topics:
+        - !Ref ConfigTopic
+      PolicyDocument:
+        Statement:
+          - Sid: AWSConfigSNSPolicy
+            Action:
+              - sns:Publish
+            Effect: Allow
+            Resource: !Ref ConfigTopic
+            Principal:
+              Service:
+                - config.amazonaws.com
+
+  EmailNotification:
+    Condition: CreateSubscription
