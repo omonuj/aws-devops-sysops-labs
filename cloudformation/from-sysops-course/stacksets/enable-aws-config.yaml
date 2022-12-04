@@ -165,4 +165,32 @@ Resources:
                 - config.amazonaws.com
 
   EmailNotification:
-    Condition: CreateSubscription
+    Condition: CreateSubscription
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: !Ref NotificationEmail
+      Protocol: email
+      TopicArn: !Ref ConfigTopic
+
+  ConfigRecorderRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - config.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+        - !Sub "arn:${AWS::Partition}:iam::aws:policy/service-role/AWS_ConfigRole"
+
+  ConfigRecorder:
+    Type: AWS::Config::ConfigurationRecorder
+    DependsOn:
+      - ConfigBucketPolicy
+    Properties:
+      RoleARN: !GetAtt ConfigRecorderRole.Arn
