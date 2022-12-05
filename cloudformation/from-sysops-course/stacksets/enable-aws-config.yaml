@@ -193,4 +193,31 @@ Resources:
     DependsOn:
       - ConfigBucketPolicy
     Properties:
-      RoleARN: !GetAtt ConfigRecorderRole.Arn
+      RoleARN: !GetAtt ConfigRecorderRole.Arn
+      RecordingGroup:
+        AllSupported: !Ref AllSupported
+        IncludeGlobalResourceTypes: !Ref IncludeGlobalResourceTypes
+        ResourceTypes: !If
+          - IsAllSupported
+          - !Ref AWS::NoValue
+          - !Ref ResourceTypes
+
+  ConfigDeliveryChannel:
+    Type: AWS::Config::DeliveryChannel
+    DependsOn:
+      - ConfigBucketPolicy
+    Properties:
+      Name: !If
+        - IsGeneratedDeliveryChannelName
+        - !Ref AWS::NoValue
+        - !Ref DeliveryChannelName
+      ConfigSnapshotDeliveryProperties:
+        DeliveryFrequency: !FindInMap
+          - Settings
+          - FrequencyMap
+          - !Ref Frequency
+      S3BucketName: !Ref ConfigBucket
+      SnsTopicARN: !If
+        - CreateTopic
+        - !Ref ConfigTopic
+        - !Ref TopicArn
