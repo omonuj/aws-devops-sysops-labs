@@ -11,3 +11,17 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Metadata:
+      AWS::CloudFormation::Init:
+        configSets:
+          default: ["install", "configure"]
+        install:
+          packages:
+            yum:
+              httpd: []
+          files:
+            "/etc/cfn/cfn-hup.conf":
+              content: !Sub |
