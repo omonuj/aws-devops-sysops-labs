@@ -38,3 +38,16 @@ Resources:
                 runas=root
         configure:
           files:
+            "/var/www/html/index.html":
+              content: |
+                <html>
+                <head>
+                  <title>Hello World</title>
+                </head>
+                <body>
+                  <h1>Hello, World! Welcome to my website!</h1>
+                  <p> I've added some content to it </p>
+                </body>
+                </html>
+              mode: "000644"
+              owner: "root"
