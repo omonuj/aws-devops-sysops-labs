@@ -51,3 +51,16 @@ Resources:
                 </html>
               mode: "000644"
               owner: "root"
+              group: "root"
+          services:
+            sysvinit:
+              httpd:
+                enabled: "true"
+                ensureRunning: "true"
+    Properties:
+      ImageId: ami-0a3c3a20c09d6f377
+      InstanceType: "t3.micro"
+      SecurityGroups:
+        - Ref: WebServerSecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
