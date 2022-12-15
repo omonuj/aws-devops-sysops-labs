@@ -64,3 +64,16 @@ Resources:
         - Ref: WebServerSecurityGroup
       UserData:
         Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y aws-cfn-bootstrap
+          # Initialize cfn-init
+          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyInstance --configsets default --region ${AWS::Region}
+          # Start cfn-hup
+          /opt/aws/bin/cfn-hup || error_exit 'Failed to start cfn-hup'
+          # Signal success
+          /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource MyInstance --region ${AWS::Region}
+
+Outputs:
+  WebsiteURL:
+    Description: URL of the website
+    Value: !Sub "http://${MyInstance.PublicDnsName}/"
