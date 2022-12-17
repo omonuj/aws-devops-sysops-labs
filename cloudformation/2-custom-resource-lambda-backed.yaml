@@ -11,4 +11,18 @@ Resources:
       BucketName: !Ref S3BucketName
     DeletionPolicy: Delete
 
-  S3CustomResource:
+  S3CustomResource:
+    Type: Custom::S3CustomResource
+    Properties:
+      ServiceToken: !GetAtt AWSLambdaFunction.Arn
+      bucket_name: !Ref JonahpleS3Bucket    ## Additional parameter here
+
+  AWSLambdaFunction:
+     Type: AWS::Lambda::Function
+     Properties:
+       Description: "Empty an S3 bucket!"
+       FunctionName: !Sub '${AWS::StackName}-${AWS::Region}-lambda'
+       Handler: index.handler
+       Role: !GetAtt AWSLambdaExecutionRole.Arn
+       Timeout: 360
+       Runtime: python3.12
