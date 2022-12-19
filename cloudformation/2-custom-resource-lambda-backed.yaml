@@ -25,4 +25,18 @@ Resources:
        Handler: index.handler
        Role: !GetAtt AWSLambdaExecutionRole.Arn
        Timeout: 360
-       Runtime: python3.12
+       Runtime: python3.12
+       Code:
+         ZipFile: |
+          import boto3
+          import cfnresponse
+          ### cfnresponse module help in sending responses to CloudFormation
+          ### instead of writing your own code
+
+          def handler(event, context):
+              # Get request type
+              the_event = event['RequestType']        
+              print("The event is: ", str(the_event))
+
+              response_data = {}
+              s3 = boto3.client('s3')
