@@ -39,4 +39,18 @@ Resources:
               print("The event is: ", str(the_event))
 
               response_data = {}
-              s3 = boto3.client('s3')
+              s3 = boto3.client('s3')
+
+              # Retrieve parameters (bucket name)
+              bucket_name = event['ResourceProperties']['bucket_name']
+              
+              try:
+                  if the_event == 'Delete':
+                      print("Deleting S3 content...")
+                      b_operator = boto3.resource('s3')
+                      b_operator.Bucket(str(bucket_name)).objects.all().delete()
+
+                  # Everything OK... send the signal back
+                  print("Execution succesfull!")
+                  cfnresponse.send(event, context, cfnresponse.SUCCESS, response_data)
+              except Exception as e:
