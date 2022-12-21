@@ -53,4 +53,18 @@ Resources:
                   # Everything OK... send the signal back
                   print("Execution succesfull!")
                   cfnresponse.send(event, context, cfnresponse.SUCCESS, response_data)
-              except Exception as e:
+              except Exception as e:
+                  print("Execution failed...")
+                  print(str(e))
+                  response_data['Data'] = str(e)
+                  cfnresponse.send(event, context, cfnresponse.FAILED, response_data)
+
+  AWSLambdaExecutionRole:
+     Type: AWS::IAM::Role
+     Properties:
+       AssumeRolePolicyDocument:
+         Statement:
+         - Action:
+           - sts:AssumeRole
+           Effect: Allow
+           Principal:
