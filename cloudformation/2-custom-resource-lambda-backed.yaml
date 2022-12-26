@@ -81,4 +81,18 @@ Resources:
              - logs:PutLogEvents
              Effect: Allow
              Resource: arn:aws:logs:*:*:*
-           Version: '2012-10-17'
+           Version: '2012-10-17'
+         PolicyName: !Sub ${AWS::StackName}-${AWS::Region}-AWSLambda-CW
+       - PolicyDocument:
+           Statement:
+           - Action:
+             - s3:PutObject
+             - s3:DeleteObject
+             - s3:List*
+             Effect: Allow
+             Resource:
+             - !Sub arn:aws:s3:::${JonahpleS3Bucket}
+             - !Sub arn:aws:s3:::${JonahpleS3Bucket}/*
+           Version: '2012-10-17'
+         PolicyName: !Sub ${AWS::StackName}-${AWS::Region}-AWSLambda-S3
+       RoleName: !Sub ${AWS::StackName}-${AWS::Region}-AWSLambdaExecutionRole
