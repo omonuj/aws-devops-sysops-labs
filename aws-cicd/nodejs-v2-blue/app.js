@@ -8,3 +8,13 @@ var log = function(entry) {
 };
 
 var server = http.createServer(function (req, res) {
+    if (req.method === 'POST') {
+        var body = '';
+
+        req.on('data', function(chunk) {
+            body += chunk;
+        });
+
+        req.on('end', function() {
+            if (req.url === '/') {
+                log('Received message: ' + body);
