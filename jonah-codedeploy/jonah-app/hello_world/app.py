@@ -30,3 +30,13 @@ def lambda_handler(event, context):
     # except requests.RequestException as e:
     #     # Send some context about this error to Lambda Logs
     #     print(e)
+
+    #     raise e
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "message": "hello world v2",
+            # "location": ip.text.replace("\n", "")
+        }),
+    }
