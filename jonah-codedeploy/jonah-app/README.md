@@ -16,3 +16,20 @@ The AWS Toolkit is an open source plug-in for popular IDEs that uses the JONAH C
 * [IntelliJ](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
 * [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
 * [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
+
+## Deploy the jonahple application
+
+The Serverless Application Model Command Line Interface (JONAH CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
+
+To use the JONAH CLI, you need the following tools.
+
+* JONAH CLI - [Install the JONAH CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-jonah-cli-install.html)
+* [Python 3 installed](https://www.python.org/downloads/)
+* Docker - [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
+
+To build and deploy your application for the first time, run the following in your shell:
+
+```bash
+jonah build --use-container
+jonah deploy --guided
+```
