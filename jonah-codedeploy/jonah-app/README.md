@@ -33,3 +33,20 @@ To build and deploy your application for the first time, run the following in yo
 jonah build --use-container
 jonah deploy --guided
 ```
+
+The first command will build the source of your application. The second command will package and deploy your application to AWS, with a series of prompts:
+
+* **Stack Name**: The name of the stack to deploy to CloudFormation. This should be unique to your account and region, and a good starting point would be something matching your project name.
+* **AWS Region**: The AWS region you want to deploy your app to.
+* **Confirm changes before deploy**: If set to yes, any change sets will be shown to you before execution for manual review. If set to no, the AWS JONAH CLI will automatically deploy application changes.
+* **Allow JONAH CLI IAM role creation**: Many AWS JONAH templates, including this example, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modified IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to the `jonah deploy` command.
+* **Save arguments to jonahconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `jonah deploy` without parameters to deploy changes to your application.
+
+You can find your API Gateway Endpoint URL in the output values displayed after deployment.
+
+## Use the JONAH CLI to build and test locally
+
+Build your application with the `jonah build --use-container` command.
+
+```bash
+jonah-jonah-app$ jonah build --use-container
