@@ -50,3 +50,20 @@ Build your application with the `jonah build --use-container` command.
 
 ```bash
 jonah-jonah-app$ jonah build --use-container
+```
+
+The JONAH CLI installs dependencies defined in `hello_world/requirements.txt`, creates a deployment package, and saves it in the `.aws-jonah/build` folder.
+
+Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
+
+Run functions locally and invoke them with the `jonah local invoke` command.
+
+```bash
+jonah-jonah-app$ jonah local invoke HelloWorldFunction --event events/event.json
+```
+
+The JONAH CLI can also emulate your application's API. Use the `jonah local start-api` to run the API locally on port 3000.
+
+```bash
+jonah-jonah-app$ jonah local start-api
+jonah-jonah-app$ curl http://localhost:3000/
