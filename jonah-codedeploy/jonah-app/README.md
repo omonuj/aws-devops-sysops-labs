@@ -67,3 +67,20 @@ The JONAH CLI can also emulate your application's API. Use the `jonah local star
 ```bash
 jonah-jonah-app$ jonah local start-api
 jonah-jonah-app$ curl http://localhost:3000/
+```
+
+The JONAH CLI reads the application template to determine the API's routes and the functions that they invoke. The `Events` property on each function's definition includes the route and method for each path.
+
+```yaml
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+```
+
+## Add a resource to your application
+The application template uses AWS Serverless Application Model (AWS JONAH) to define application resources. AWS JONAH is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application resources such as functions, triggers, and APIs. For resources not included in [the JONAH specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md), you can use standard [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) resource types.
+
+## Fetch, tail, and filter Lambda function logs
