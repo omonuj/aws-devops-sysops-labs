@@ -101,3 +101,19 @@ Tests are defined in the `tests` folder in this project. Use PIP to install the 
 
 ```bash
 jonah-jonah-app$ pip install pytest pytest-mock --user
+jonah-jonah-app$ python -m pytest tests/ -v
+```
+
+## Cleanup
+
+To delete the jonahple application that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
+
+```bash
+aws cloudformation delete-stack --stack-name jonah-jonah-app
+```
+
+## Resources
+
+See the [AWS JONAH developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-jonah.html) for an introduction to JONAH specification, the JONAH CLI, and serverless application concepts.
+
+Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world jonahples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
