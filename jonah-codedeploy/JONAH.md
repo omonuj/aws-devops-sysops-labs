@@ -4,3 +4,8 @@ From: https://docs.aws.amazon.com/serverless-application-model/latest/developerg
 jonah init --runtime python3.9
 
 # Step 2 - Build your application
+cd jonah-app
+jonah build
+
+# Step 3 - Package your application
+jonah deploy --guided
