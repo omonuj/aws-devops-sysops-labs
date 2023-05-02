@@ -22,3 +22,15 @@ class CdkAppStack extends cdk.Stack {
         // ========================================
         // Bucket for storing images
         // ========================================
+        const bucket = new s3.Bucket(this, imageBucket, {
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
+        });
+        new cdk.CfnOutput(this, "Bucket", { value: bucket.bucketName });
+
+        // ========================================
+        // Role for AWS Lambda
+        // ========================================
+        const role = new iam.Role(this, "cdk-rekn-lambdarole", {
+            assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
+        });
+        role.addToPolicy(
