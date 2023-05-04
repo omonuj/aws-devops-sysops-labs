@@ -34,3 +34,14 @@ class CdkAppStack extends cdk.Stack {
             assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
         });
         role.addToPolicy(
+            new iam.PolicyStatement({
+                effect: iam.Effect.ALLOW,
+                actions: [
+                    "rekognition:*",
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents",
+                ],
+                resources: ["*"],
+            })
+        );
