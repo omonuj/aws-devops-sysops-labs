@@ -45,3 +45,15 @@ class CdkAppStack extends cdk.Stack {
                 resources: ["*"],
             })
         );
+
+        // ========================================
+        // DynamoDB table for storing image labels
+        // ========================================
+        const table = new dynamodb.Table(this, "cdk-rekn-imagetable", {
+            partitionKey: { name: "Image", type: dynamodb.AttributeType.STRING },
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
+        });
+        new cdk.CfnOutput(this, "Table", { value: table.tableName });
+
+        // ========================================
+        // AWS Lambda function
