@@ -57,3 +57,15 @@ class CdkAppStack extends cdk.Stack {
 
         // ========================================
         // AWS Lambda function
+        // ========================================
+        const lambdaFn = new lambda.Function(this, "cdk-rekn-function", {
+            code: lambda.AssetCode.fromAsset("lambda"),
+            runtime: lambda.Runtime.PYTHON_3_8,
+            handler: "index.handler",
+            role: role,
+            environment: {
+                TABLE: table.tableName,
+                BUCKET: bucket.bucketName,
+            },
+        });
+        lambdaFn.addEventSource(
