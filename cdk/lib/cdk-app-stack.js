@@ -69,3 +69,14 @@ class CdkAppStack extends cdk.Stack {
             },
         });
         lambdaFn.addEventSource(
+            new lambdaEventSource.S3EventSource(bucket, {
+                events: [s3.EventType.OBJECT_CREATED],
+            })
+        );
+
+        bucket.grantReadWrite(lambdaFn);
+        table.grantFullAccess(lambdaFn);
+    }
+}
+
+module.exports = { CdkAppStack };
