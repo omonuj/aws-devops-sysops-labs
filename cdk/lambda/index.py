@@ -26,3 +26,16 @@ def rekFunction(bucket, key):
     client = boto3.client("rekognition")
 
     response = client.detect_labels(Image={"S3Object": {"Bucket": bucket, "Name": key}},
+                                    MaxLabels=10, MinConfidence=minCofidence)
+
+    # Get the service resource
+    dynamodb = boto3.resource("dynamodb")
+
+    # Instantiate a table resource object
+    imageLabelsTable = os.environ["TABLE"]
+    table = dynamodb.Table(imageLabelsTable)
+
+    # Put item into table
+    table.put_item(
+        Item={"Image": key}
+    )
