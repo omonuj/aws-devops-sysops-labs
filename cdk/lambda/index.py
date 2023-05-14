@@ -39,3 +39,17 @@ def rekFunction(bucket, key):
     table.put_item(
         Item={"Image": key}
     )
+
+    objectsDetected = []
+
+    for label in response["Labels"]:
+        newItem = label["Name"]
+        objectsDetected.append(newItem)
+        objectNum = len(objectsDetected)
+        itemAtt = f"object{objectNum}"
+        response = table.update_item(
+            Key={"Image": key},
+            UpdateExpression=f"set {itemAtt} = :r",
+            ExpressionAttributeValues={":r": f"{newItem}"},
+            ReturnValues="UPDATED_NEW"
+        )
