@@ -10,3 +10,15 @@ cdk init --language javascript
 
 # verify it works correctly
 cdk ls
+
+# install the necessary packages
+npm install @aws-cdk/aws-s3 @aws-cdk/aws-iam @aws-cdk/aws-lambda @aws-cdk/aws-lambda-event-sources @aws-cdk/aws-dynamodb
+
+
+# 2. copy the content of cdk-app-stack.js into lib/cdk-app-stack.js
+
+
+# 3. setup the Lambda function
+mkdir lambda && touch index.py
+
+# 4. bootstrap the CDK application
