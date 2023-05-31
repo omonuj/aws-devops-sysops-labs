@@ -1,0 +1,6 @@
+---
+schemaVersion: '2.2'
+description: Jonahple YAML template to install Apache
+parameters: 
+  Message:
+    type: "String"
