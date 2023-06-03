@@ -4,3 +4,9 @@ description: Jonahple YAML template to install Apache
 parameters: 
   Message:
     type: "String"
+    description: "Welcome Message"
+    default: "Hello World"
+mainSteps:
+- action: aws:runShellScript
+  name: configureApache
+  inputs:
