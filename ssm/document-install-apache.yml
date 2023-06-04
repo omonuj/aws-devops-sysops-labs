@@ -10,3 +10,9 @@ mainSteps:
 - action: aws:runShellScript
   name: configureApache
   inputs:
+    runCommand:
+    - 'sudo yum update -y'
+    - 'sudo yum install -y httpd'
+    - 'sudo systemctl start httpd'
+    - 'sudo systemctl enable httpd'
+    - 'echo "{{Message}} from $(hostname -f)" > /var/www/html/index.html'
