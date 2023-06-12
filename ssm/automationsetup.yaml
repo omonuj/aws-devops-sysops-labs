@@ -41,4 +41,14 @@ Resources:
       ManagedPolicyArns:
       - arn:aws:iam::aws:policy/service-role/AmazonSSMAutomationRole
       Path: "/"
-      RoleName: AutomationServiceRole
+      RoleName: AutomationServiceRole
+      Policies:
+      - PolicyName: passrole
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - iam:PassRole
+            Resource:
+            - !GetAtt ManagedInstanceRole.Arn
