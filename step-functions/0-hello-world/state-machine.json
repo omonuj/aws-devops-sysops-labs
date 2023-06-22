@@ -9,3 +9,13 @@
       "Parameters": {
         "Payload.$": "$",
         "FunctionName": "<ENTER FUNCTION NAME HERE>"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException",
+            "Lambda.TooManyRequestsException"
+          ],
+          "IntervalSeconds": 1,
