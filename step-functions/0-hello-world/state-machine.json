@@ -29,3 +29,13 @@
       "Type": "Choice",
       "Choices": [
         {
+          "Variable": "$",
+          "StringMatches": "*Jonah*",
+          "Next": "Is Jonah"
+        }
+      ],
+      "Default": "Not Jonah"
+    },
+    "Is Jonah": {
+      "Type": "Pass",
+      "Result": "Woohoo!",
