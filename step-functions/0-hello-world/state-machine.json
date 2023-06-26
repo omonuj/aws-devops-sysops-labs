@@ -39,3 +39,12 @@
     "Is Jonah": {
       "Type": "Pass",
       "Result": "Woohoo!",
+      "End": true
+    },
+    "Not Jonah": {
+      "Type": "Fail",
+      "Error": "ErrorCode",
+      "Cause": "Jonah wasn't found in the output of the Lambda Function"
+    }
+  }
+}
