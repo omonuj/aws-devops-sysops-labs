@@ -1,0 +1,12 @@
+{
+    "Comment": "A Retry and Catch example of the Amazon States Language using an AWS Lambda Function",
+    "StartAt": "InvokeMyFunction",
+    "States": {
+      "InvokeMyFunction": {
+        "Type": "Task",
+        "Resource": "<enter resource ARN here>",
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "CustomError"
+            ],
