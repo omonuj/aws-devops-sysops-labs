@@ -34,3 +34,15 @@
         "Catch": [
           {
             "ErrorEquals": [
+              "CustomError"
+            ],
+            "Next": "CustomErrorFallback"
+          },
+          {
+            "ErrorEquals": [
+              "States.TaskFailed"
+            ],
+            "Next": "ReservedTypeFallback"
+          },
+          {
+            "ErrorEquals": [
