@@ -46,3 +46,15 @@
           },
           {
             "ErrorEquals": [
+              "States.ALL"
+            ],
+            "Next": "CatchAllFallback"
+          }
+        ],
+        "End": true
+      },
+      "CustomErrorFallback": {
+        "Type": "Pass",
+        "Result": "This is a fallback from a custom lambda function exception",
+        "End": true
+      },
