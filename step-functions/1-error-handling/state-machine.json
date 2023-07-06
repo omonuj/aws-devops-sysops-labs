@@ -58,3 +58,15 @@
         "Result": "This is a fallback from a custom lambda function exception",
         "End": true
       },
+      "ReservedTypeFallback": {
+        "Type": "Pass",
+        "Result": "This is a fallback from a reserved error code",
+        "End": true
+      },
+      "CatchAllFallback": {
+        "Type": "Pass",
+        "Result": "This is a fallback from a reserved error code",
+        "End": true
+      }
+    }
+  }
