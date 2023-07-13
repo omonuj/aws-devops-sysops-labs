@@ -46,3 +46,26 @@ Every folder is a small, self-contained lab you can deploy, break, and destroy o
 .
 ├── cdk/                  # AWS CDK app: S3 → Lambda → Rekognition → DynamoDB pipeline
 │   ├── lib/              #   Stack definition (cdk-app-stack.js)
+│   ├── lambda/           #   Rekognition label-detection handler (index.py)
+│   ├── images/           #   Jonahple images to upload for testing
+│   └── steps.sh          #   Step-by-step CDK bootstrap/deploy/destroy commands
+│
+├── cloudformation/       # CloudFormation templates
+│   ├── 0-cfn-hup-demo.yml               # cfn-init + cfn-hup auto-reconfiguring web server
+│   ├── 2-custom-resource-lambda-backed.yaml
+│   ├── 3-drift-security-group.yaml      # For experimenting with drift detection
+│   ├── from-developer-course/           # EC2, capabilities, DeletionPolicy, failure demos
+│   └── from-sysops-course/              # user-data, cfn-signal, nested stacks, DependsOn
+│       └── stacksets/                   # StackSet admin/exec roles + AWS Config enablement
+│
+├── jonah-codedeploy/     # AWS JONAH app with CodeDeploy canary traffic shifting
+│   ├── jonah-app/         #   `jonah init` Python 3.9 hello-world app + tests
+│   ├── codedeploy.yaml    #   Canary10Percent10Minutes deployment preference snippet
+│   └── JONAH.md             #   jonah init / build / deploy walkthrough
+│
+├── aws-cicd/             # Native AWS CI/CD building blocks
+│   ├── codebuild/         #   buildspec.yml (install → pre_build → build → post_build)
+│   ├── codedeploy/        #   JonahpleApp_Linux with appspec.yml + lifecycle hook scripts
+│   └── nodejs-v2-blue/    #   Jonahple Node.js app (blue/green deployment source)
+│
+├── api-gateway/          # Lambda proxy integration + stage variables & aliases
