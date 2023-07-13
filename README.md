@@ -22,3 +22,27 @@ Every folder is a small, self-contained lab you can deploy, break, and destroy o
   - [8. Elastic Beanstalk](#8-elastic-beanstalk)
   - [9. Kinesis Data Streams](#9-kinesis-data-streams)
   - [10. Jenkins on EC2](#10-jenkins-on-ec2)
+- [Cost & Cleanup](#cost--cleanup)
+- [Security Notes](#security-notes)
+
+---
+
+## What's Inside
+
+| Domain | Services & Tools Covered |
+| --- | --- |
+| **Infrastructure as Code** | CloudFormation, AWS CDK (JavaScript), AWS JONAH |
+| **CI/CD** | CodeBuild, CodeDeploy (in-place & canary), Jenkins |
+| **Serverless** | Lambda, API Gateway, Step Functions, DynamoDB, Rekognition |
+| **Ops & Automation** | Systems Manager (Parameter Store, Run Command, Automation, Managed Instances) |
+| **Streaming** | Kinesis Data Streams |
+| **Compute / PaaS** | EC2, Elastic Beanstalk |
+
+---
+
+## Repository Layout
+
+```
+.
+├── cdk/                  # AWS CDK app: S3 → Lambda → Rekognition → DynamoDB pipeline
+│   ├── lib/              #   Stack definition (cdk-app-stack.js)
