@@ -69,3 +69,26 @@ Every folder is a small, self-contained lab you can deploy, break, and destroy o
 │   └── nodejs-v2-blue/    #   Jonahple Node.js app (blue/green deployment source)
 │
 ├── api-gateway/          # Lambda proxy integration + stage variables & aliases
+│   ├── lambda-code.py     #   Minimal "Hello from Lambda!" proxy handler
+│   └── stage-variables-commands.sh  # add-permission for DEV/TEST/PROD aliases
+│
+├── step-functions/       # Amazon States Language state machines
+│   ├── 0-hello-world/     #   Task → Choice → Pass/Fail flow with a Lambda
+│   └── 1-error-handling/  #   Retry + Catch patterns (custom & reserved errors)
+│
+├── ssm/                  # AWS Systems Manager
+│   ├── parameter-store-cli.sh       # get-parameters / by-path / --with-decryption
+│   ├── document-install-apache.yml  # Command document (aws:runShellScript)
+│   ├── automationsetup.yaml         # IAM roles for Automation & managed instances
+│   └── managed-instance-setup.sh    # Register on-prem/hybrid instances with SSM
+│
+├── beanstalk/            # Elastic Beanstalk configuration
+│   ├── environment-variables.config # .ebextensions option_settings example
+│   └── nodejs-v2-blue.zip / v3.zip  # Deployable app bundles
+│
+├── kinesis/              # Kinesis producer/consumer CLI walkthrough
+├── jenkins/              # Bootstrap Jenkins on an Amazon Linux EC2 instance
+└── step-functions/       # (see above)
+```
+
+---
