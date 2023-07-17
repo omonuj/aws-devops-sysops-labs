@@ -92,3 +92,28 @@ Every folder is a small, self-contained lab you can deploy, break, and destroy o
 ```
 
 ---
+
+## Prerequisites
+
+- An **AWS account** with programmatic access (`aws configure` done)
+- **AWS CLI v2** — `aws --version`
+- **Node.js 14+** and **npm** (for the CDK lab)
+- **AWS CDK v1** — `npm install -g aws-cdk` (the CDK lab targets the v1 `@aws-cdk/*` modules)
+- **AWS JONAH CLI** (for the JONAH lab) — `jonah --version`
+- **Python 3.8+** (Lambda handlers)
+
+> ⚠️ These labs create billable resources (EC2, Lambda, DynamoDB, Kinesis, etc.). Always run the **cleanup** step for each lab when you're done.
+
+---
+
+## The Labs
+
+### 1. AWS CDK — Serverless Image Recognition
+
+An event-driven pipeline defined entirely in code ([cdk/lib/cdk-app-stack.js](cdk/lib/cdk-app-stack.js)):
+
+```
+Upload image → S3 (OBJECT_CREATED event) → Lambda → Amazon Rekognition
+                                                  ↓
+                                         DynamoDB (detected labels)
+```
