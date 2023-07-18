@@ -117,3 +117,25 @@ Upload image → S3 (OBJECT_CREATED event) → Lambda → Amazon Rekognition
                                                   ↓
                                          DynamoDB (detected labels)
 ```
+
+The [Lambda handler](cdk/lambda/index.py) calls `rekognition:detect_labels` (min confidence 60%) and writes each detected label back to a DynamoDB table keyed by image name.
+
+**Run it:**
+```bash
+cd cdk           # then follow steps.sh
+cdk bootstrap
+cdk deploy
+# upload one of the images in cdk/images/ to the created bucket
+cdk destroy      # remember to empty the S3 bucket first
+```
+See [cdk/steps.sh](cdk/steps.sh) for the full sequence.
+
+### 2. CloudFormation
+
+Progressive templates that build intuition for the whole CloudFormation lifecycle:
+
+- **[0-cfn-hup-demo.yml](cloudformation/0-cfn-hup-demo.yml)** — a web server bootstrapped with `cfn-init` and kept in sync with `cfn-hup`.
+- **[2-custom-resource-lambda-backed.yaml](cloudformation/2-custom-resource-lambda-backed.yaml)** — a Lambda-backed custom resource.
+- **[3-drift-security-group.yaml](cloudformation/3-drift-security-group.yaml)** — deploy, then manually edit the SG to practice **drift detection**.
+- **[from-developer-course/](cloudformation/from-developer-course/)** — capabilities, `DeletionPolicy`, and intentional-failure/rollback demos.
+- **[from-sysops-course/](cloudformation/from-sysops-course/)** — `user-data` vs `cfn-init`, `cfn-signal`, nested stacks, `DependsOn`, and **StackSets** (admin/exec roles + org-wide AWS Config enablement).
