@@ -139,3 +139,27 @@ Progressive templates that build intuition for the whole CloudFormation lifecycl
 - **[3-drift-security-group.yaml](cloudformation/3-drift-security-group.yaml)** — deploy, then manually edit the SG to practice **drift detection**.
 - **[from-developer-course/](cloudformation/from-developer-course/)** — capabilities, `DeletionPolicy`, and intentional-failure/rollback demos.
 - **[from-sysops-course/](cloudformation/from-sysops-course/)** — `user-data` vs `cfn-init`, `cfn-signal`, nested stacks, `DependsOn`, and **StackSets** (admin/exec roles + org-wide AWS Config enablement).
+
+```bash
+aws cloudformation deploy \
+  --template-file cloudformation/0-cfn-hup-demo.yml \
+  --stack-name cfn-hup-demo --capabilities CAPABILITY_IAM
+```
+
+### 3. JONAH + CodeDeploy
+
+A `jonah init` Python 3.9 hello-world API ([jonah-codedeploy/jonah-app/](jonah-codedeploy/jonah-app/)) plus a [CodeDeploy snippet](jonah-codedeploy/codedeploy.yaml) that adds **canary traffic shifting** (`Canary10Percent10Minutes`) and an `AutoPublishAlias`.
+
+```bash
+cd jonah-codedeploy/jonah-app
+jonah build
+jonah deploy --guided
+```
+Walkthrough in [jonah-codedeploy/JONAH.md](jonah-codedeploy/JONAH.md).
+
+### 4. AWS CI/CD (CodeBuild / CodeDeploy)
+
+- **[buildspec.yml](aws-cicd/codebuild/buildspec.yml)** — a four-phase CodeBuild spec (`install → pre_build → build → post_build`) that runs a smoke test with `grep`.
+- **[JonahpleApp_Linux/](aws-cicd/codedeploy/JonahpleApp_Linux/)** — a CodeDeploy bundle with an [appspec.yml](aws-cicd/codedeploy/JonahpleApp_Linux/appspec.yml) and lifecycle-hook scripts (`install_dependencies`, `start_server`, `stop_server`) that deploy a static site to EC2.
+
+### 5. API Gateway + Lambda
