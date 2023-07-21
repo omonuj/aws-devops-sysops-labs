@@ -163,3 +163,28 @@ Walkthrough in [jonah-codedeploy/JONAH.md](jonah-codedeploy/JONAH.md).
 - **[JonahpleApp_Linux/](aws-cicd/codedeploy/JonahpleApp_Linux/)** — a CodeDeploy bundle with an [appspec.yml](aws-cicd/codedeploy/JonahpleApp_Linux/appspec.yml) and lifecycle-hook scripts (`install_dependencies`, `start_server`, `stop_server`) that deploy a static site to EC2.
 
 ### 5. API Gateway + Lambda
+
+A minimal [Lambda proxy handler](api-gateway/lambda-code.py) fronted by API Gateway, plus [CLI commands](api-gateway/stage-variables-commands.sh) that wire up `lambda:InvokeFunction` permissions for **DEV / TEST / PROD** aliases — the foundation for stage variables and multi-environment deployments.
+
+### 6. Step Functions
+
+Two Amazon States Language state machines:
+
+- **[0-hello-world](step-functions/0-hello-world/state-machine.json)** — `Task` (Lambda) → `Choice` → `Pass`/`Fail`, showing input matching and retries.
+- **[1-error-handling](step-functions/1-error-handling/state-machine.json)** — layered `Retry` and `Catch` blocks for custom errors, `States.TaskFailed`, and `States.ALL`.
+
+### 7. Systems Manager (SSM)
+
+- **[parameter-store-cli.sh](ssm/parameter-store-cli.sh)** — retrieve secrets by name, by path, recursively, and with decryption.
+- **[document-install-apache.yml](ssm/document-install-apache.yml)** — a Run Command document that installs Apache with a parameterized welcome message.
+- **[automationsetup.yaml](ssm/automationsetup.yaml)** + **[managed-instance-setup.sh](ssm/managed-instance-setup.sh)** — IAM roles for Automation and registering hybrid/on-prem managed instances.
+
+### 8. Elastic Beanstalk
+
+An **[.ebextensions](beanstalk/environment-variables.config)** example that injects environment variables via `option_settings`, plus versioned deployable app bundles for blue/green practice.
+
+### 9. Kinesis Data Streams
+
+A [producer/consumer walkthrough](kinesis/kinesis-data-streams.sh) using the CLI: `put-record`, `describe-stream`, `get-shard-iterator`, and `get-records` (with both CLI v1 and v2 syntax).
+
+### 10. Jenkins on EC2
