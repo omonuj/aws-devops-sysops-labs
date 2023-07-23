@@ -188,3 +188,25 @@ An **[.ebextensions](beanstalk/environment-variables.config)** example that inje
 A [producer/consumer walkthrough](kinesis/kinesis-data-streams.sh) using the CLI: `put-record`, `describe-stream`, `get-shard-iterator`, and `get-records` (with both CLI v1 and v2 syntax).
 
 ### 10. Jenkins on EC2
+
+A [bootstrap script](jenkins/JENKINS.sh) that installs Java 11 and Jenkins on Amazon Linux and starts the service, ready for the initial admin unlock.
+
+---
+
+## Cost & Cleanup
+
+Each lab provisions real, billable resources. To avoid surprise charges:
+
+- **CDK:** empty the S3 bucket, then `cdk destroy`.
+- **CloudFormation / JONAH:** `aws cloudformation delete-stack --stack-name <name>`.
+- **EC2 / Beanstalk / Jenkins / Kinesis:** terminate instances, delete environments, and delete the stream when finished.
+
+---
+
+## Security Notes
+
+These are **learning templates**, not production blueprints. Before reusing anything:
+
+- Several examples use broad IAM permissions (e.g. `rekognition:*`, `resources: ["*"]`) and open security groups (`0.0.0.0/0`) for convenience — scope these down.
+- Do **not** commit real account IDs, ARNs, or secrets. The values in [stage-variables-commands.sh](api-gateway/stage-variables-commands.sh) are examples — replace the account number and region with your own.
+- Store real secrets in **SSM Parameter Store (SecureString)** or **Secrets Manager**, never in templates.
